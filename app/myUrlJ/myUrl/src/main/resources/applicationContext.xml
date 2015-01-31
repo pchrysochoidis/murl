@@ -19,7 +19,7 @@
     
     <!-- The  beans exist in this package-->
     <context:annotation-config/> 
-    <context:component-scan base-package="com.tinyurl.app.myUrl.*" />
+    <context:component-scan base-package="com.tinyurl.myUrl.*" />
 
     <!-- Use Spring annotation -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -28,7 +28,7 @@
     <!-- Thread safe session object shared by whole application  -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource" />      
-        <property name="packagesToScan" value="com.tinyurl.app.myUrl.model" />
+        <property name="packagesToScan" value="com.tinyurl.myurl.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
                 <property name="showSql" value="false" />

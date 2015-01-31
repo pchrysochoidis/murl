@@ -1,7 +1,8 @@
-package org.url.dao.url.impl;
+package com.tinyurl.myurl.url.dao.url.impl;
 
 import org.springframework.stereotype.Repository;
-import org.url.dao.url.UrlDAO;
+
+import com.tinyurl.myurl.dao.url.UrlDAO;
 
 @Repository("urlDAOImpl")
 public class UrlDAOImpl implements UrlDAO {

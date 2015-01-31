@@ -1,4 +1,4 @@
-package org.myUrlRest.api.url.myUrl;
+package com.tinyurl.myurl.api.url.myUrl;
 
 import java.net.MalformedURLException;
 
@@ -12,8 +12,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.url.dto.url.UrlDTO;
-import org.url.service.url.UrlService;
+
+import com.tinyurl.myurl.dto.url.UrlDTO;
+import com.tinyurl.myurl.service.url.UrlService;
 
 
 @Component
