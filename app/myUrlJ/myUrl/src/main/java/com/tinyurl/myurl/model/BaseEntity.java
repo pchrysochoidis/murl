@@ -11,7 +11,7 @@ import javax.persistence.Id;
 
 /**
  *
- * @author Karen.Molony
+ * @author ntinaki2f
  */
 @javax.persistence.MappedSuperclass
 public abstract class BaseEntity implements java.io.Serializable {

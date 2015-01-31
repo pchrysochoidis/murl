@@ -1,47 +1,40 @@
 package com.tinyurl.myurl.model.url;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.tinyurl.myurl.model.BaseEntity;
 
-/*This is the model of table of database*/
-/*Use Hibernate annotations*/
 @Entity
-@Table(name = "murl_url")
-public class Url extends BaseEntity{
-
+@Table(name = "murl_sorten_token")
+public class SortenToken extends BaseEntity {
+    
     /**
      * 
      */
-    private static final long serialVersionUID = -8185947053179311251L;
+    private static final long serialVersionUID = 6221501555938976569L;
 
-    @Column(nullable=false, name ="url")
+    @Column(nullable=false, name ="token")
     @NotEmpty
-    String url;
+    String token;
     
     @Column(nullable=false, name ="created")
     Date created;
     
     @Column(nullable=false, name ="modified")
     Date modified;
-    
-    @OneToMany(fetch = javax.persistence.FetchType.LAZY)
-    List<SortenToken> token;
-    
-    public String getUrl() {
-        return url;
+
+    public String getToken() {
+        return token;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Date getCreated() {
@@ -60,13 +53,4 @@ public class Url extends BaseEntity{
         this.modified = modified;
     }
 
-    public List<SortenToken> getToken() {
-        return token;
-    }
-
-    public void setToken(List<SortenToken> token) {
-        this.token = token;
-    }
-    
-    
 }
