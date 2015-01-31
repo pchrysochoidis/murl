@@ -7,9 +7,8 @@
     <artifactId>myUrlJ</artifactId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.tinyurl.app</groupId>
   <artifactId>myUrl</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>myUrl</name>
   <url>http://maven.apache.org</url>
   <properties>
