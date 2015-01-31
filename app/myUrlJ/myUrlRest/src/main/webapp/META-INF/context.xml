@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/aemRest">
-    <ResourceLink global="jdbc/aemDataSource" name="jdbc/aemDataSource" type="javax.sql.DataSource"/>
+<Context antiJARLocking="true" path="/myUrlRest">
+    <ResourceLink global="jdbc/tinyUrl" name="jdbc/tinyUrl" type="javax.sql.DataSource"/>
 </Context>
