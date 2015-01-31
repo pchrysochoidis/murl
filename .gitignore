@@ -1,0 +1,12 @@
+app/.metadata/
+app/RemoteSystemsTempFiles/
+app/Servers/
+app/myUrlJ/.classpath
+app/myUrlJ/myUrl/.classpath
+app/myUrlJ/myUrlRest/.classpath
+app/myUrlJ/myUrlUI/.classpath
+app/myUrlJ/myUrlRest/.settings/org.eclipse.wst.validation.prefs
+app/myUrlJ/.settings/
+app/myUrlJ/myUrl/.settings/
+app/myUrlJ/myUrlRest/.settings/
+app/myUrlJ/myUrlUI/.settings/
