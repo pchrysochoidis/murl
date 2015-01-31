@@ -1,4 +1,4 @@
-package org.myUrlRest.api.url;
+package org.myUrlRest.api.url.myUrl;
 
 import java.net.MalformedURLException;
 
