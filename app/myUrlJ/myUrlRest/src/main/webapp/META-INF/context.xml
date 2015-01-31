@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/myUrlRest">
-    <ResourceLink global="jdbc/mUrl" name="jdbc/mUrl" type="javax.sql.DataSource"/>
+    <ResourceLink global="jdbc/murlDB" name="jdbc/murlDB" type="javax.sql.DataSource"/>
 </Context>

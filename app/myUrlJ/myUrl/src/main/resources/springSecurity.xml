@@ -20,16 +20,22 @@
             <intercept-url pattern="/myUrlUI**" access="ROLE_USER" />
                
             <form-login login-page="${myurl_config.index}"
-            authentication-failure-url="${myurl_config.login_failed}"
+           
             authentication-success-handler-ref="authenticationSuccessHandler" />
-            
-            <logout delete-cookies="JSESSIONID" logout-success-url="${aem_config.logout_successful}" logout-url="/j_spring_security_logout" />  
         
         </http>
         
         <beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
             <beans:property name="defaultTargetUrl" value="${myurl_config.index}"/>
         </beans:bean>
-        
+  
+     <authentication-manager alias="authenticationManager">
+            <authentication-provider user-service-ref="databaseUserDetailsService">
+                <!-- should we reverse engineer  
+                "PBKDF2 algorithm with a SHA256 hash"
+                as used by Django, or enforce a password change for all users? -->
+                <password-encoder hash="plaintext" />
+            </authentication-provider>
+        </authentication-manager>
  
 </beans:beans>
