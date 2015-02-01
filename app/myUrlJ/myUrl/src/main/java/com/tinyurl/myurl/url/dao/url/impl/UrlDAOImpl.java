@@ -16,6 +16,9 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
+
 import com.tinyurl.myurl.dao.url.UrlDAO;
 import com.tinyurl.myurl.model.url.Url;
 import com.tinyurl.myurl.url.dao.JpaDAO;
@@ -74,7 +77,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
     @Override
     public List<String> findUrlByToken(Long tokenId) {
        List<String> result = null;
-       Query q = entityManager.createQuery("select u.url from Url inner join u.token t where u.id = t.id");
+       Query q = entityManager.createQuery("select u.url from Url inner join u.token t where u.id = t.url.id and u.id = :id");
        q.setParameter("id", tokenId);
        try {
            result = q.getResultList();
@@ -85,6 +88,33 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
        return result;
     }
 
-    
+    @Override
+    public String getCurrentToken(Long id) {
+        String result = null;
+        Query q = entityManager.createQuery("select t.token from Url u inner join u.token t where u.id = t.url.id and u.id = :id order by t.created asc").setMaxResults(1);
+        q.setParameter("id", id);
+        try {
+            result = (String) q.getSingleResult();
+        }catch (NoResultException nre) {
+            LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
+        }
+        
+        return result;
+    }
+
+    @Override
+    public Url findUrlByName(String url) {
+        Url result = null;
+        Query q = entityManager.createQuery("select u from Url u where u.url = :url");
+        q.setParameter("url", url);
+        try {
+            result = (Url) q.getSingleResult();
+        }catch (NoResultException nre) {
+            LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
+        }
+        
+        return result;
+    }
+  
 
 }

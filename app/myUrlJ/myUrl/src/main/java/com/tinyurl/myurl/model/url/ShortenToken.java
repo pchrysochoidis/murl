@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -26,6 +28,10 @@ public class ShortenToken extends BaseEntity {
     @Column(nullable=false, name ="token")
     @NotEmpty
     String token;
+    
+    @ManyToOne
+    @JoinColumn (name="url_id")
+    Url url;
     
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", nullable = false)
@@ -67,6 +73,14 @@ public class ShortenToken extends BaseEntity {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    public Url getUrl() {
+        return url;
+    }
+
+    public void setUrl(Url url) {
+        this.url = url;
     }
 
 }

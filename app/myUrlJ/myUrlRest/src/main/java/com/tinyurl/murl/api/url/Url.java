@@ -55,13 +55,11 @@ public class Url extends BaseService {
         try {
             mapper.setSerializationInclusion(Include.NON_NULL);
             UrlDTO dto = mapper.readValue(json, UrlDTO.class);
-            String error = urlService.validateUrl(dto);
-            if (error == null) {
-                result.setData(urlService.updateUrl(dto));
-            } else {
-                result.setError(true);
-                result.setError_code(error);
-            }
+            
+            result.setError(false);
+            result.setError_code("");
+            dto = urlService.updateUrl(dto);
+            result.setData(urlService.getCurrentToken(dto));
         } catch (JsonParseException e) {
             LOGGER.log(Level.WARNING, SERVICE_EXCEPTION, e);
             result.setError(true);

@@ -27,23 +27,13 @@ public class UrlServiceImpl implements UrlService{
     @Autowired
     ShortenTokenDAO tokenDAO;
     
-    @Override
-    @Transactional
-    public String validateUrl(UrlDTO dto) {
-        Url url = getUrlFromDTO(dto);
-
-        return urlDAO.validateUrl(url);
-    }
-
     private Url getUrlFromDTO(UrlDTO dto) {
-        Url url = null;
+       
         List<ShortenToken> tokens = new ArrayList<ShortenToken>();
-      
-        if (dto.getId() == null) {
+        Url url = urlDAO.findUrlByName(dto.getUrl());
+        if (url == null) {
             url = new Url();
-        } else {
-            url = urlDAO.findUrlById(dto.getId());
-        }
+        } 
 
         url.setUrl(dto.getUrl());
         //get tokens for url
@@ -61,38 +51,46 @@ public class UrlServiceImpl implements UrlService{
     @Override
     @Transactional
     public UrlDTO updateUrl(UrlDTO dto) {
-        Url url = getUrlFromDTO(dto);
 
-        dto = UrlDTO.map(urlDAO.updateUrl(url));
+        Url url = getUrlFromDTO(dto);
+       
+        url = urlDAO.updateUrl(url);
+        dto = UrlDTO.map(url);
         
-        shortenUrl(dto);
-        
-        url = getUrlFromDTO(dto);
-        
-        dto = UrlDTO.map(urlDAO.updateUrl(url));
-        
+        shortenUrl(url);
+
         return dto;
     }
     
+    @Override
+    @Transactional
+    public String getCurrentToken(UrlDTO dto) {
+        String currentToken = urlDAO.getCurrentToken(dto.getId());
+        
+        return currentToken;
+    }
     
-    private ShortenTokenDTO shortenUrl(UrlDTO dto) {
+    
+    private ShortenTokenDTO shortenUrl(Url url) {
         List<Long> tokenIds = new ArrayList<Long>();
         ShortenTokenDTO shortenDTO = new ShortenTokenDTO();
-        String shorten = getShortenToken(dto.getUrl());
+        String shorten = getShortenToken(url.getUrl());
         shortenDTO.setToken(shorten);
        
         ShortenToken token = getTokenFromDTO(shortenDTO);
+        
+        token.setUrl(url);
         shortenDTO = ShortenTokenDTO.map(tokenDAO.updateToken(token));
         
         tokenIds.add(shortenDTO.getId());
-        dto.setTokens(tokenIds);
+      
         return shortenDTO;
         
     }
     
     private String getShortenToken(String url) {
-    	
-    	return Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
+        
+        return "r"+Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
     }
 
     private ShortenToken getTokenFromDTO(ShortenTokenDTO shortenDTO) {

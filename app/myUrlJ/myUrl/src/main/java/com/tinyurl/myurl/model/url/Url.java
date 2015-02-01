@@ -31,9 +31,7 @@ public class Url extends BaseEntity{
     @NotEmpty
     String url;
     
- 
-    
-    @OneToMany(fetch = javax.persistence.FetchType.LAZY)
+    @OneToMany(fetch = javax.persistence.FetchType.LAZY,  mappedBy = "url")
     List<ShortenToken> token;
     
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,7 +51,6 @@ public class Url extends BaseEntity{
     protected void onUpdate() {
         modified = new Date();
     }
-
     public String getUrl() {
         return url;
     }
@@ -85,6 +82,7 @@ public class Url extends BaseEntity{
     public void setModified(Date modified) {
         this.modified = modified;
     }
+
     
     
     
