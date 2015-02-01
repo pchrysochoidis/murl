@@ -4,7 +4,7 @@
     xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.tinyurl.app</groupId>
+        <groupId>com.tinyurl</groupId>
         <artifactId>myUrlJ</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -35,6 +35,7 @@
     </dependencies>
 
     <build>
+    <pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -82,7 +83,7 @@
                 </executions>
             </plugin>
         </plugins>
-        
+        </pluginManagement>
     </build>
 
 </project>
