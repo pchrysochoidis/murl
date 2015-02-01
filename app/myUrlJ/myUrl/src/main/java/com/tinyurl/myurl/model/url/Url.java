@@ -34,7 +34,7 @@ public class Url extends BaseEntity{
     Date modified;
     
     @OneToMany(fetch = javax.persistence.FetchType.LAZY)
-    List<SortenToken> token;
+    List<ShortenToken> token;
     
     public String getUrl() {
         return url;
@@ -60,11 +60,11 @@ public class Url extends BaseEntity{
         this.modified = modified;
     }
 
-    public List<SortenToken> getToken() {
+    public List<ShortenToken> getToken() {
         return token;
     }
 
-    public void setToken(List<SortenToken> token) {
+    public void setToken(List<ShortenToken> token) {
         this.token = token;
     }
     

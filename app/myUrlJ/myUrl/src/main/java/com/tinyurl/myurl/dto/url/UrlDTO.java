@@ -3,7 +3,7 @@ package com.tinyurl.myurl.dto.url;
 import java.sql.Date;
 import java.util.List;
 
-import com.tinyurl.myurl.model.url.SortenToken;
+import com.tinyurl.myurl.model.url.ShortenToken;
 import com.tinyurl.myurl.model.url.Url;
 
 /*data transfer object*/
@@ -65,7 +65,7 @@ public class UrlDTO {
         return dto;
     }
 
-    private static Long[] mapTokens(List<SortenToken> tokens) {
+    private static Long[] mapTokens(List<ShortenToken> tokens) {
         if (tokens == null) {
             return new Long[0];
         }

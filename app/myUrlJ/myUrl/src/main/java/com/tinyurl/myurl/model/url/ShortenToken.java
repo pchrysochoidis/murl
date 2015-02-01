@@ -12,7 +12,7 @@ import com.tinyurl.myurl.model.BaseEntity;
 
 @Entity
 @Table(name = "murl_sorten_token")
-public class SortenToken extends BaseEntity {
+public class ShortenToken extends BaseEntity {
     
     /**
      * 

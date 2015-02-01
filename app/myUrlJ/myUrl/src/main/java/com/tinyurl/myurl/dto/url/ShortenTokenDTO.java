@@ -2,9 +2,9 @@ package com.tinyurl.myurl.dto.url;
 
 import java.sql.Date;
 
-import com.tinyurl.myurl.model.url.SortenToken;
+import com.tinyurl.myurl.model.url.ShortenToken;
 
-public class SortenTokenDTO {
+public class ShortenTokenDTO {
     
     private Long id;
     private String token;
@@ -35,8 +35,8 @@ public class SortenTokenDTO {
         this.modified = modified;
     }
     
-    public static SortenTokenDTO map(SortenToken token) {
-        SortenTokenDTO dto = new SortenTokenDTO();
+    public static ShortenTokenDTO map(ShortenToken token) {
+        ShortenTokenDTO dto = new ShortenTokenDTO();
 
         if (token != null) {
             dto.setId(token.getId());
