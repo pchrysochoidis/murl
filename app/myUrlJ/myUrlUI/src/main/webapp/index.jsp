@@ -8,33 +8,36 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript" src="js/script.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 Url:<input name="url">
 <button type="submit" onclick="getUrl()">Submit Value</button>
 
  <script type="text/javascript">
- var data = JSON.stringify({url :'http://www.w3schools.com/jsref/event_onclick.asp'})
- (function() {
+ //var data = JSON.stringify({url :'http://www.w3schools.com/jsref/event_onclick.asp'});
+ function  getUrl() {
 	 jQuery.ajax({
          cache: true,
-         data: data ,
+       //  data: data ,
          dataType: 'json',
          contentType: 'application/json',
          type: 'get',
          url: '/myUrlRest/api/url/getUrl/',
-         success: function (data, text_status, xhr) {
+         success: function ( text_status, xhr) {
              // jQuery treats 0 as success, but this is what some browsers return when the XHR failed due to a 
              // network error
              if (xhr.status === 0) {
                  alert('Error');
              } else {
-                 success(data);
+                // success(data);
              }
          },
          error: function () {
            
          }
      });
- })();
+ };
  </script>
 </body>
 </html>
