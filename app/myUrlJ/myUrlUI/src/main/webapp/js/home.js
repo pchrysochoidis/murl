@@ -27,6 +27,7 @@ $(document).ready(function() {
 				if(!jsonRes.error){
 					linkJQ.val("");
 				}
+				console.log(jsonRes);
 				showServerMessage(jsonRes.error, jsonRes.error_code, jsonRes.data, url);
 			},
 			complete: function(){
@@ -81,15 +82,18 @@ $(document).ready(function() {
 	
 	function showServerMessage(error, error_code, data, url){
 		var message = "";
-		switch (error_code) {
-		case ERROR.SERVER.DUPLICATE_URL:
-			message = "<strong>Error on server.</strong> Url <b>" + url + "</b> already exists. Please try another.";
-			break;
-		case null:
-			message = '<strong>Here is your shorter link: <a href="' + DEFAULT_LINK + '" target="blank">' + DEFAULT_LINK + '</a></strong>';
-			break;
-		default:
-			break;
+		if(!error){
+			var shortLink = DEFAULT_LINK + data;
+			message = '<strong>Here is your shorter link: <a href="' + shortLink + '" target="blank">' + shortLink + '</a></strong>';
+		}else{
+			switch (error_code) {
+			case ERROR.SERVER.DUPLICATE_URL:
+				message = "<strong>Error on server.</strong> Url <b>" + url + "</b> already exists. Please try another.";
+				break;
+			default:
+				message = "<strong>Error on server.</strong> Please try again.";
+				break;
+			}
 		}
 		$("#servermessagescontainer").html(
 				'<div role="alert" class="alert alert-' + (!error ? "success" : "danger") + ' alert-dismissible fade in">' +

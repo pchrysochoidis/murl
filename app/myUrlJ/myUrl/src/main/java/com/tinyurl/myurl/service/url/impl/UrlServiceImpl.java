@@ -90,7 +90,7 @@ public class UrlServiceImpl implements UrlService{
     
     private String getShortenToken(String url) {
         
-        return "r"+Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
+        return Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
     }
 
     private ShortenToken getTokenFromDTO(ShortenTokenDTO shortenDTO) {
