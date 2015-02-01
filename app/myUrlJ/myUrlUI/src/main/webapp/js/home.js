@@ -15,7 +15,7 @@ $(document).ready(function() {
 			url:'/myUrlRest/api/url/saveUrl/', 
 			type:"post",
 			data: JSON.stringify({
-                url: "http://www.uom.gr"
+                url: "http://www.facebook.gr"
             }),
 			dataType: 'json',
             contentType: 'application/json',
