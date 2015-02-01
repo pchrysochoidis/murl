@@ -65,7 +65,7 @@ public class ShortenTokenDAOImpl extends JpaDAO<ShortenToken> implements Shorten
     @Override
     public ShortenToken findTokenByName(String name) {
         ShortenToken result = null;
-        Query q = entityManager.createQuery("select s from ShortenToken where s.token = :token");
+        Query q = entityManager.createQuery("select s from ShortenToken s where s.token = :token");
         q.setParameter("token", name);
         try {
             result = (ShortenToken) q.getSingleResult();

@@ -16,4 +16,8 @@ public interface UrlDAO {
 
     List<String> findUrlByToken(Long tokenId);
 
+    String getCurrentToken(Long id);
+
+    Url findUrlByName(String url);
+
 }

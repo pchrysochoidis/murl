@@ -17,7 +17,8 @@ public class UrlDTO {
     private Date created;
     private Date modified;
     private List<Long> tokens;
-    
+    private String currentToken;
+  
     public Long getId() {
         return id;
     }
@@ -48,6 +49,13 @@ public class UrlDTO {
     }
     public void setTokens(List<Long> tokens) {
         this.tokens = tokens;
+    }
+
+    public String getCurrentToken() {
+        return currentToken;
+    }
+    public void setCurrentToken(String currentToken) {
+        this.currentToken = currentToken;
     }
     public static UrlDTO map(Url url) {
         UrlDTO dto = new UrlDTO();
