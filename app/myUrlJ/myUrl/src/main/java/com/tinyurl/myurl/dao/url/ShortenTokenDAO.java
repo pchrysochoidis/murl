@@ -4,10 +4,12 @@ import com.tinyurl.myurl.model.url.ShortenToken;
 
 public interface ShortenTokenDAO {
 
-    ShortenToken validateToken();
-
     ShortenToken findTokenById(Long id);
 
     ShortenToken updateToken(ShortenToken token);
+
+    String validateToken(ShortenToken token);
+
+    ShortenToken findTokenByName(String name);
 
 }

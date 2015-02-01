@@ -1,5 +1,6 @@
 package com.tinyurl.myurl.url.dao.url.impl;
 
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,6 +8,9 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+
+
+
 
 
 
@@ -48,11 +52,11 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
             q.setParameter("id", url.getId());
         }
 
-        q.setParameter("name", url.getUrl());
+        q.setParameter("url", url.getUrl());
 
         try {
             if ((long) q.getSingleResult() != 0) {
-                return "E_BUILDING_DUPLICATE_NAME";
+                return "E_BUILDING_DUPLICATE_URL";
             }
         } catch (NoResultException nre) {
             LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
@@ -64,6 +68,21 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
     @Override
     public Url findUrlById(Long id) {
         return findById(id);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<String> findUrlByToken(Long tokenId) {
+       List<String> result = null;
+       Query q = entityManager.createQuery("select u.url from Url inner join u.token t where u.id = t.id");
+       q.setParameter("id", tokenId);
+       try {
+           result = q.getResultList();
+       }catch (NoResultException nre) {
+           LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
+       }
+       
+       return result;
     }
 
     

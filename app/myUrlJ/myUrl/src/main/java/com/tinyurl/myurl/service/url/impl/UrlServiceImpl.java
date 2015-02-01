@@ -35,7 +35,8 @@ public class UrlServiceImpl implements UrlService{
 
     private Url getUrlFromDTO(UrlDTO dto) {
         Url url = null;
-
+        List<ShortenToken> tokens = new ArrayList<ShortenToken>();
+      
         if (dto.getId() == null) {
             url = new Url();
         } else {
@@ -43,11 +44,20 @@ public class UrlServiceImpl implements UrlService{
         }
 
         url.setUrl(dto.getUrl());
-       
+        //get tokens for url
+        if (dto.getTokens()!= null) {
+           for (Long id : dto.getTokens()) {
+               ShortenToken token = tokenDAO.findTokenById(id);
+               tokens.add(token);
+           }
+        }
+        
+        url.setToken(tokens);
         return url;
     }
 
     @Override
+    @Transactional
     public UrlDTO updateUrl(UrlDTO dto) {
         Url url = getUrlFromDTO(dto);
 
@@ -55,7 +65,10 @@ public class UrlServiceImpl implements UrlService{
         
         shortenUrl(dto);
         
+        url = getUrlFromDTO(dto);
+        
         dto = UrlDTO.map(urlDAO.updateUrl(url));
+        
         return dto;
     }
     
@@ -86,6 +99,13 @@ public class UrlServiceImpl implements UrlService{
         token.setToken(shortenDTO.getToken());
        
         return token;
+    }
+
+    @Override
+    @Transactional
+    public List<String> findUrlByToken(String tokenName) {
+        ShortenToken token = tokenDAO.findTokenByName(tokenName);
+        return urlDAO.findUrlByToken(token.getId());
     }
 
 

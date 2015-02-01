@@ -1,5 +1,7 @@
 package com.tinyurl.myurl.dao.url;
 
+import java.util.List;
+
 import com.tinyurl.myurl.model.url.Url;
 
 /*UrlDAO access layer for url object*/
@@ -11,5 +13,7 @@ public interface UrlDAO {
     String validateUrl(Url url);
 
     Url findUrlById(Long id);
+
+    List<String> findUrlByToken(Long tokenId);
 
 }

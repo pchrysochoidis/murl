@@ -12,7 +12,7 @@ $(document).ready(function() {
 			return;
 		}
 		$.ajax({
-			url:'/myUrlRest/api/url/getUrl/', 
+			url:'/myUrlRest/api/url/saveUrl/', 
 			type:"post",
 			data: JSON.stringify({
                 url: "http://www.uom.gr"

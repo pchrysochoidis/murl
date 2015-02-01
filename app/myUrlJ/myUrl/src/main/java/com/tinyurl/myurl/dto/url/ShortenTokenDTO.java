@@ -1,6 +1,6 @@
 package com.tinyurl.myurl.dto.url;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.tinyurl.myurl.model.url.ShortenToken;
 

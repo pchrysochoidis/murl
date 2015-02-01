@@ -1,10 +1,14 @@
 package com.tinyurl.myurl.model.url;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -23,11 +27,23 @@ public class ShortenToken extends BaseEntity {
     @NotEmpty
     String token;
     
-    @Column(nullable=false, name ="created")
-    Date created;
-    
-    @Column(nullable=false, name ="modified")
-    Date modified;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", nullable = false)
+    private Date created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "modified", nullable = false)
+    private Date modified;
+
+    @PrePersist
+    protected void onCreate() {
+        modified = created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        modified = new Date();
+    }
 
     public String getToken() {
         return token;
