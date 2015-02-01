@@ -7,6 +7,7 @@
         <wb-resource deploy-path="/" source-path="/src/webapp/META-INF"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
         <dependent-module archiveName="myUrl-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/myUrl/myUrl">
             <dependency-type>uses</dependency-type>
         </dependent-module>
