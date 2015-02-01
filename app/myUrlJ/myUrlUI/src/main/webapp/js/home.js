@@ -12,9 +12,13 @@ $(document).ready(function() {
 			return;
 		}
 		$.ajax({
-			url:"", //TODO: fill ajax location
-			type:"post", //TODO: it will be a post?
-			data: {},//TODO: fill data
+			url:'/myUrlRest/api/url/getUrl/', 
+			type:"post",
+			data: JSON.stringify({
+                url: "http://www.uom.gr"
+            }),
+			dataType: 'json',
+            contentType: 'application/json',
 			beforeSend: function(){
 				shortBtnJQ.button("loading");
 				linkJQ.attr("disabled", "disabled");

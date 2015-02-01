@@ -1,8 +1,11 @@
 package com.tinyurl.myurl.url.dao.url.impl;
 
+import org.springframework.stereotype.Repository;
+
 import com.tinyurl.myurl.dao.url.ShortenTokenDAO;
 import com.tinyurl.myurl.model.url.ShortenToken;
 
+@Repository("shortenTokenDAOImpl")
 public class ShortenTokenDAOImpl implements ShortenTokenDAO{
 
     @Override

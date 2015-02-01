@@ -42,7 +42,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
     @Override
     public String validateUrl(Url url) {
         boolean isNew = url.getId() == null;
-        Query q = entityManager.createQuery("select count(u) from Url u where " + (isNew ? "" : "u.id <> :id and ") + "u.name = :name");
+        Query q = entityManager.createQuery("select count(u) from Url u where " + (isNew ? "" : "u.id <> :id and ") + "u.url = :url");
 
         if (!isNew) {
             q.setParameter("id", url.getId());
