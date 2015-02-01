@@ -54,6 +54,8 @@ public class UrlServiceImpl implements UrlService{
         dto = UrlDTO.map(urlDAO.updateUrl(url));
         
         shortenUrl(dto);
+        
+        dto = UrlDTO.map(urlDAO.updateUrl(url));
         return dto;
     }
     
