@@ -1,4 +1,4 @@
-package com.tinyurl.myurl.api;
+package main.java.com.tinyurl.myurl.api;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

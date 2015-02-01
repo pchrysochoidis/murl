@@ -16,3 +16,4 @@ local.properties
 .settings/
 .idea/
 .loadpath
+/target/
