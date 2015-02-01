@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd" >
+
+        <context:property-placeholder location="file:${catalina.base}/myurl_properties/myurl_config.properties" order="0" ignore-resource-not-found="true" ignore-unresolvable="true" /> 
+        <context:property-placeholder location="classpath:myurl_config.properties" order="1" ignore-resource-not-found="true" ignore-unresolvable="true"/> 
+
+        
+        <global-method-security pre-post-annotations="enabled" />
+        
+        <http auto-config="true">
+            
+            <intercept-url pattern="/myUrlUI**" access="ROLE_USER" />
+               
+            <form-login login-page="${myurl_config.index}"
+           
+            authentication-success-handler-ref="authenticationSuccessHandler" />
+        
+        </http>
+        
+        <beans:bean id="authenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+            <beans:property name="defaultTargetUrl" value="${myurl_config.index}"/>
+        </beans:bean>
+  
+     <authentication-manager alias="authenticationManager">
+            <authentication-provider user-service-ref="databaseUserDetailsService">
+                <!-- should we reverse engineer  
+                "PBKDF2 algorithm with a SHA256 hash"
+                as used by Django, or enforce a password change for all users? -->
+                <password-encoder hash="plaintext" />
+            </authentication-provider>
+        </authentication-manager>
+ 
+</beans:beans>

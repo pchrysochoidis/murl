@@ -3,6 +3,7 @@
 	<name>myUrlRest</name>
 	<comment></comment>
 	<projects>
+		<project>myUrl</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
