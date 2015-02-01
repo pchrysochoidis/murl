@@ -1,5 +1,6 @@
 package com.tinyurl.myurl.service.url.impl;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.hash.Hashing;
 import com.tinyurl.myurl.dao.url.ShortenTokenDAO;
 import com.tinyurl.myurl.dao.url.UrlDAO;
 import com.tinyurl.myurl.dto.url.ShortenTokenDTO;
@@ -76,7 +78,8 @@ public class UrlServiceImpl implements UrlService{
     private ShortenTokenDTO shortenUrl(UrlDTO dto) {
         List<Long> tokenIds = new ArrayList<Long>();
         ShortenTokenDTO shortenDTO = new ShortenTokenDTO();
-        shortenDTO.setToken("TxnxBe");
+        String shorten = getShortenToken(dto.getUrl());
+        shortenDTO.setToken(shorten);
        
         ShortenToken token = getTokenFromDTO(shortenDTO);
         shortenDTO = ShortenTokenDTO.map(tokenDAO.updateToken(token));
@@ -85,6 +88,11 @@ public class UrlServiceImpl implements UrlService{
         dto.setTokens(tokenIds);
         return shortenDTO;
         
+    }
+    
+    private String getShortenToken(String url) {
+    	
+    	return Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
     }
 
     private ShortenToken getTokenFromDTO(ShortenTokenDTO shortenDTO) {
