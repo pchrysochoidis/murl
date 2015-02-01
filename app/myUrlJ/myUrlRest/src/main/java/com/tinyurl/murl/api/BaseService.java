@@ -1,4 +1,4 @@
-package main.java.com.tinyurl.myurl.api;
+package com.tinyurl.murl.api;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -18,9 +18,6 @@ public abstract class BaseService {
     protected static final int HTTP_STATUS_OK = 200;
     protected static final int HTTP_STATUS_BAD_REQUEST = 400;
     protected static final int HTTP_STATUS_SERVER_ERROR = 500;
-
-    protected static final String ERROR_CODES_JSON_PARSE_ERROR = "E_JSON_PARSE";
-    protected static final String ERROR_CODES_IO_ERROR = "E_IO";
 
     private static final Logger LOGGER = Logger.getLogger(BaseService.class.getName());
     private static final String ERROR_PARSIN_JSON = "Error parsing JSON";
@@ -48,5 +45,4 @@ public abstract class BaseService {
         return crunchifyBuilder.toString();
     }
     
-  
 }
