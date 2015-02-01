@@ -13,11 +13,7 @@
 		<script type="text/javascript"	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/home.js"></script>
 	</head>
-	<body>
-	<%
-	//TODO: remove
-	Thread.currentThread().sleep(2000);
-	%> 
+	<body> 
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">

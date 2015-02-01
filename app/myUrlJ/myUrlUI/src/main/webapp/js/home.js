@@ -12,10 +12,10 @@ $(document).ready(function() {
 			return;
 		}
 		$.ajax({
-			url:'/myUrlRest/api/url/saveUrl/', 
-			type:"post",
+			url: '/myUrlRest/api/url/saveUrl/', 
+			type: "post",
 			data: JSON.stringify({
-                url: "http://www.facebook.gr"
+                url: url
             }),
 			dataType: 'json',
             contentType: 'application/json',
@@ -23,13 +23,11 @@ $(document).ready(function() {
 				shortBtnJQ.button("loading");
 				linkJQ.attr("disabled", "disabled");
 			},
-			success: function(response){
-				response = $.trim(response);
-				var jsonRes = $.parseJSON(response);
-				if(jsonRes.s){
+			success: function(jsonRes){
+				if(!jsonRes.error){
 					linkJQ.val("");
 				}
-				showServerMessage(jsonRes.s, jsonRes.m, jsonRes.l);
+				showServerMessage(jsonRes.error, jsonRes.error_code, jsonRes.data, url);
 			},
 			complete: function(){
 				shortBtnJQ.button("reset");
@@ -42,6 +40,7 @@ $(document).ready(function() {
 	
 	$("#link_input").keypress(function(){
 		clearUrlErrors();
+		clearServerMessage();
 	});
 
 	function showLinkError(error, clearOther){
@@ -76,15 +75,26 @@ $(document).ready(function() {
 		errorContainer.html("");
 	}
 	
-	function showServerMessage(success, message, link){
+	function clearServerMessage(){
+		$("#servermessagescontainer").html("");
+	}
+	
+	function showServerMessage(error, error_code, data, url){
+		var message = "";
+		switch (error_code) {
+		case ERROR.SERVER.DUPLICATE_URL:
+			message = "<strong>Error on server.</strong> Url <b>" + url + "</b> already exists. Please try another.";
+			break;
+		case null:
+			message = '<strong>Here is your shorter link: <a href="' + DEFAULT_LINK + '" target="blank">' + DEFAULT_LINK + '</a></strong>';
+			break;
+		default:
+			break;
+		}
 		$("#servermessagescontainer").html(
-				'<div role="alert" class="alert alert-' + (success ? "success" : "danger") + ' alert-dismissible fade in">' +
+				'<div role="alert" class="alert alert-' + (!error ? "success" : "danger") + ' alert-dismissible fade in">' +
 			      '<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>' +
-			      message +
-				      '<p>' +(success ? 
-				    		  		'<button class="btn btn-default" id="copylinkBtn">Copy μUrl link</button>'
-				      		   : '') +
-		      		 '</p>' +
+			      '<p>' + message + '</p>' +
 			    '</div>');
 	}
 
@@ -92,8 +102,12 @@ $(document).ready(function() {
 
 var ERROR = {};
 	ERROR.URL = {},
-	ERROR.URL.EMPTY = 0,
+	ERROR.URL.EMPTY = 0;
 	ERROR.URL.INVALID = 1;
+	ERROR.SERVER = {};
+	ERROR.SERVER.DUPLICATE_URL = {};
+	ERROR.SERVER.DUPLICATE_URL = "E_BUILDING_DUPLICATE_URL";
+var DEFAULT_LINK = "http://localhost:8080/myUrlUI/r/";
 	
 
 var re_weburl = new RegExp(

@@ -32,6 +32,7 @@
 		    <div class="jumbotron">
 			  <h1>Redirecting to your link...</h1>
 			  <p>In a few seconds you will be redirected to your link! If it fails please <button id="tryagainBtn" class="btn btn-link btn-lg" type="button">try again...</button></p>
+			  <p id="messagescontainer"></p>
 			</div>
 		  </div>
 		</div>
