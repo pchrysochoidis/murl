@@ -1,6 +1,7 @@
 package com.tinyurl.myurl.dto.url;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tinyurl.myurl.model.url.ShortenToken;
@@ -15,7 +16,7 @@ public class UrlDTO {
     private String url;
     private Date created;
     private Date modified;
-    private Long[] tokens;
+    private List<Long> tokens;
     
     public Long getId() {
         return id;
@@ -42,10 +43,10 @@ public class UrlDTO {
         this.modified = modified;
     }
     
-    public Long[] getTokens() {
+    public List<Long> getTokens() {
         return tokens;
     }
-    public void setTokens(Long[] tokens) {
+    public void setTokens(List<Long> tokens) {
         this.tokens = tokens;
     }
     public static UrlDTO map(Url url) {
@@ -65,16 +66,16 @@ public class UrlDTO {
         return dto;
     }
 
-    private static Long[] mapTokens(List<ShortenToken> tokens) {
+    private static List<Long> mapTokens(List<ShortenToken> tokens) {
         if (tokens == null) {
-            return new Long[0];
+            return new ArrayList<Long>();
         }
 
         int n = tokens.size();
-        Long[] result = new Long[n];
+        List<Long> result =  new ArrayList<Long>();
 
         for (int i = 0; i < n; i++) {
-            result[i] = tokens.get(i).getId();
+            result.add(tokens.get(i).getId());
         }
 
         return result;

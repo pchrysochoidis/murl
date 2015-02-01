@@ -1,5 +1,8 @@
 package com.tinyurl.myurl.service.url.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,17 +53,21 @@ public class UrlServiceImpl implements UrlService{
 
         dto = UrlDTO.map(urlDAO.updateUrl(url));
         
+        shortenUrl(dto);
         return dto;
     }
     
     
     private ShortenTokenDTO shortenUrl(UrlDTO dto) {
+        List<Long> tokenIds = new ArrayList<Long>();
         ShortenTokenDTO shortenDTO = new ShortenTokenDTO();
         shortenDTO.setToken("TxnxBe");
        
         ShortenToken token = getTokenFromDTO(shortenDTO);
         shortenDTO = ShortenTokenDTO.map(tokenDAO.updateToken(token));
         
+        tokenIds.add(shortenDTO.getId());
+        dto.setTokens(tokenIds);
         return shortenDTO;
         
     }
