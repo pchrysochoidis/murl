@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.lang.model.element.Element;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Repository;
 
 
 
+
+
+import org.springframework.util.CollectionUtils;
 
 import com.tinyurl.myurl.dao.url.UrlDAO;
 import com.tinyurl.myurl.model.url.Url;
@@ -102,18 +106,19 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Url findUrlByName(String url) {
-        Url result = null;
+        List<Url> result = null;
         Query q = entityManager.createQuery("select u from Url u where u.url = :url");
         q.setParameter("url", url);
         try {
-            result = (Url) q.getSingleResult();
+            result = q.getResultList();
         }catch (NoResultException nre) {
             LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
         }
         
-        return result;
+        return CollectionUtils.isEmpty(result ) ? null : result.get(0);
     }
   
 
