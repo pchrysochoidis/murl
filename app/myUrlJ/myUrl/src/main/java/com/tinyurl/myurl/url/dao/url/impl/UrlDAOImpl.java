@@ -4,23 +4,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.lang.model.element.Element;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-
-
-
-
-
-
-
-
-
-
-
-
 import org.springframework.util.CollectionUtils;
 
 import com.tinyurl.myurl.dao.url.UrlDAO;
@@ -50,6 +37,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
         return url;
     }
 
+    /*not currently used*/
     @Override
     public String validateUrl(Url url) {
         boolean isNew = url.getId() == null;
@@ -63,7 +51,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
 
         try {
             if ((long) q.getSingleResult() != 0) {
-                return "E_BUILDING_DUPLICATE_URL";
+                return "E_DUPLICATE_URL";
             }
         } catch (NoResultException nre) {
             LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);

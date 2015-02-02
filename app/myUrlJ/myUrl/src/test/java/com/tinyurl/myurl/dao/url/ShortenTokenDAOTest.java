@@ -21,7 +21,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.tinyurl.myurl.model.url.Url;
+import com.tinyurl.myurl.model.url.ShortenToken;
 
 /**
  *
@@ -29,12 +29,12 @@ import com.tinyurl.myurl.model.url.Url;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:testContext.xml")
-public class UrlDAOTest {
+public class ShortenTokenDAOTest {
 
     @Autowired
-    UrlDAO urlDAO;
+    ShortenTokenDAO tokenDAO;
 
-    public UrlDAOTest() {
+    public ShortenTokenDAOTest() {
     }
 
     @BeforeClass
@@ -57,46 +57,45 @@ public class UrlDAOTest {
     @Rollback
     @Test
     public void testSaveUrl() {
-        Url url = new Url();
-        String urlText = "http://www.uom.gr";
+        ShortenToken token = new ShortenToken();
+        String tokenText = "fTXfdfsd";
         
-        url.setUrl(urlText);
-        urlDAO.updateUrl(url);
+        token.setToken(tokenText);
+        tokenDAO.updateToken(token);
         
-        url = urlDAO.findUrlByName(url.getUrl());
-        assertEquals(url.getUrl(), urlText);
-    }
-    
-    @Transactional
-    @Rollback
-    @Test
-    public void testValidateUrl() {
-        Url url = new Url(); 
-        
-        url.setUrl("http://www.uom.gr");
-        
-        assertEquals("E_DUPLICATE_URL", urlDAO.validateUrl(url));
-
-        url.setUrl("X");
-
-        assertEquals(null, urlDAO.validateUrl(url));
-
-        url.setId(1L);
-
-        assertEquals(null, urlDAO.validateUrl(url));
-    }
-    
-    @Transactional
-    @Rollback
-    @Test
-    public void testFindUrlById() {
-        Long id = 1L;
-        String urlText = "http://www.uom.gr";
-        
-        Url url = urlDAO.findUrlById(id);
-        
-        assertEquals(url.getUrl(), urlText);
-
+        token = tokenDAO.findTokenByName(tokenText);
+        assertEquals(token.getToken(), tokenText);
     }
    
+    @Transactional
+    @Rollback
+    @Test
+    public void testValidateToken() {
+        ShortenToken token = new ShortenToken(); 
+        
+        token.setToken("e0d61fb8");
+        
+        assertEquals("E_DUBLICATE_TOKEN", tokenDAO.validateToken(token));
+
+        token.setToken("X");
+
+        assertEquals(null, tokenDAO.validateToken(token));
+
+        token.setId(1L);
+
+        assertEquals(null, tokenDAO.validateToken(token));
+    }
+    
+    @Transactional
+    @Rollback
+    @Test
+    public void testFindTokenById() {
+        Long id = 1L;
+        String tokenText = "e0d61fb8";
+        
+        ShortenToken token = tokenDAO.findTokenById(id);
+        
+        assertEquals(token.getToken(), tokenText);
+
+    }
 }
