@@ -98,4 +98,17 @@ public class ShortenTokenDAOTest {
         assertEquals(token.getToken(), tokenText);
 
     }
+    
+    @Transactional
+    @Rollback
+    @Test
+    public void testFindTokenByName() {
+        Long id = 1L;
+        String tokenText = "e0d61fb8";
+        
+        ShortenToken token = tokenDAO.findTokenByName(tokenText);
+        
+        assertEquals(token.getId(), id);
+
+    }
 }

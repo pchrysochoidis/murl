@@ -65,14 +65,14 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
         return findById(id);
     }
 
-    @SuppressWarnings("unchecked")
+
     @Override
-    public List<String> findUrlByToken(Long tokenId) {
-       List<String> result = null;
-       Query q = entityManager.createQuery("select u.url from Url inner join u.token t where u.id = t.url.id and u.id = :id");
+    public String findUrlByToken(Long tokenId) {
+       String result = null;
+       Query q = entityManager.createQuery("select u.url from Url u inner join u.token t where u.id = t.url.id and u.id = :id");
        q.setParameter("id", tokenId);
        try {
-           result = q.getResultList();
+           result = (String) q.getSingleResult();
        }catch (NoResultException nre) {
            LOGGER.log(Level.WARNING, ERROR_GET_URLS, nre);
        }
@@ -83,7 +83,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
     @Override
     public String getCurrentToken(Long id) {
         String result = null;
-        Query q = entityManager.createQuery("select t.token from Url u inner join u.token t where u.id = t.url.id and u.id = :id order by t.created asc").setMaxResults(1);
+        Query q = entityManager.createQuery("select t.token from Url u inner join u.token t where u.id = t.url.id and u.id = :id order by t.created desc").setMaxResults(1);
         q.setParameter("id", id);
         try {
             result = (String) q.getSingleResult();

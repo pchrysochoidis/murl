@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.tinyurl.myurl.model.BaseEntity;
 
 @Entity
@@ -25,8 +23,7 @@ public class ShortenToken extends BaseEntity {
      */
     private static final long serialVersionUID = 6221501555938976569L;
 
-    @Column(nullable=false, name ="token")
-    @NotEmpty
+    @Column(unique=true, nullable=false, name ="token")
     String token;
     
     @ManyToOne

@@ -99,4 +99,30 @@ public class UrlDAOTest {
 
     }
    
+    @Transactional
+    @Rollback
+    @Test
+    public void testFindUrlByName() {
+        Long id = 1L;
+        String urlText = "http://www.uom.gr";
+        
+        Url url = urlDAO.findUrlByName(urlText);
+        
+        assertEquals(url.getId(), id);
+
+    }
+    
+    @Transactional
+    @Rollback
+    @Test
+    public void testGetCurrentToken() {
+        Long id = 1L;
+       
+        String tokenText = "fxtes";
+        
+        String currentToken = urlDAO.getCurrentToken(id);
+        
+        assertEquals(currentToken, tokenText);
+
+    }
 }

@@ -30,6 +30,7 @@ public class UrlServiceImpl implements UrlService{
     private Url getUrlFromDTO(UrlDTO dto) {
        
         List<ShortenToken> tokens = new ArrayList<ShortenToken>();
+        List<Long> tokenIds = new ArrayList<Long>();
         Url url = urlDAO.findUrlByName(dto.getUrl());
         if (url == null) {
             url = new Url();
@@ -43,7 +44,7 @@ public class UrlServiceImpl implements UrlService{
                tokens.add(token);
            }
         }
-        
+        dto.setTokens(tokenIds);
         url.setToken(tokens);
         return url;
     }
@@ -109,7 +110,7 @@ public class UrlServiceImpl implements UrlService{
 
     @Override
     @Transactional
-    public List<String> findUrlByToken(String tokenName) {
+    public String findUrlByToken(String tokenName) {
         ShortenToken token = tokenDAO.findTokenByName(tokenName);
         return urlDAO.findUrlByToken(token.getId());
     }
