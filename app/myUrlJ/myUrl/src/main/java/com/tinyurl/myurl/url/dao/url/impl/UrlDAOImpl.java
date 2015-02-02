@@ -14,7 +14,7 @@ import com.tinyurl.myurl.dao.url.UrlDAO;
 import com.tinyurl.myurl.model.url.Url;
 import com.tinyurl.myurl.url.dao.JpaDAO;
 
-@Repository("urlDAOImpl")
+@Repository("urlDAO")
 public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
 
     private static final Logger LOGGER = Logger.getLogger(UrlDAOImpl.class.getCanonicalName());
@@ -69,7 +69,7 @@ public class UrlDAOImpl extends JpaDAO<Url>  implements UrlDAO {
     @Override
     public String findUrlByToken(Long tokenId) {
        String result = null;
-       Query q = entityManager.createQuery("select u.url from Url u inner join u.token t where u.id = t.url.id and u.id = :id");
+       Query q = entityManager.createQuery("select u.url from Url u inner join u.token t where u.id = t.url.id and t.id = :id");
        q.setParameter("id", tokenId);
        try {
            result = (String) q.getSingleResult();

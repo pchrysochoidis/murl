@@ -23,7 +23,7 @@ public class ShortenToken extends BaseEntity {
      */
     private static final long serialVersionUID = 6221501555938976569L;
 
-    @Column(unique=true, nullable=false, name ="token")
+    @Column(unique=true, nullable=false, name ="shorten_token")
     String token;
     
     @ManyToOne

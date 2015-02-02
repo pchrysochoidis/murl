@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinyurl.murl.api.BaseService;
 import com.tinyurl.myurl.dto.ServiceResponseDTO;
@@ -81,25 +80,27 @@ public class Url extends BaseService {
     @Path("/getToken/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUrlByToken(InputStream inputStream) throws MalformedURLException {
-        
+    public ServiceResponseDTO getUrlByToken(InputStream inputStream) throws MalformedURLException {
+        ServiceResponseDTO result = new ServiceResponseDTO();
         String json = getJSON(inputStream);
         ObjectMapper mapper = new ObjectMapper();
         
         try {
-            JsonNode root = mapper.readTree(json);
-            String name =root.path("token").toString();
-
-            ShortenTokenDTO dto = tokenService.findTokenByName(name);
+           
+            ShortenTokenDTO dto = mapper.readValue(json, ShortenTokenDTO.class);
+            dto = tokenService.findTokenByName(dto.getToken());
             
-            return urlService.findUrlByToken(dto.getToken());
+            result.setError(false);
+            result.setError_code("");
+            result.setData(urlService.findUrlByToken(dto.getToken()));
+            
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, SERVICE_EXCEPTION, e);
         } catch (NumberFormatException e) {
             LOGGER.log(Level.WARNING, SERVICE_EXCEPTION, e);
         }
 
-        return null;
+        return result;
     }
 
 }

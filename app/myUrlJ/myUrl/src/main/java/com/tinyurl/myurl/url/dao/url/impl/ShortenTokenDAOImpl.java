@@ -12,7 +12,7 @@ import com.tinyurl.myurl.dao.url.ShortenTokenDAO;
 import com.tinyurl.myurl.model.url.ShortenToken;
 import com.tinyurl.myurl.url.dao.JpaDAO;
 
-@Repository("shortenTokenDAOImpl")
+@Repository("shortenTokenDAO")
 public class ShortenTokenDAOImpl extends JpaDAO<ShortenToken> implements ShortenTokenDAO{
 
     private static final Logger LOGGER = Logger.getLogger(UrlDAOImpl.class.getCanonicalName());
@@ -64,6 +64,7 @@ public class ShortenTokenDAOImpl extends JpaDAO<ShortenToken> implements Shorten
 
     @Override
     public ShortenToken findTokenByName(String name) {
+       
         ShortenToken result = null;
         Query q = entityManager.createQuery("select s from ShortenToken s where s.token = :token");
         q.setParameter("token", name);

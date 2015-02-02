@@ -56,7 +56,7 @@ public class ShortenTokenDAOTest {
     @Transactional
     @Rollback
     @Test
-    public void testSaveUrl() {
+    public void testToken() {
         ShortenToken token = new ShortenToken();
         String tokenText = "fTXfdfsd";
         
