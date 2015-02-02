@@ -3,7 +3,6 @@ package com.tinyurl.murl.api.url;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -82,7 +81,7 @@ public class Url extends BaseService {
     @Path("/getToken/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<String> getUrlByToken(InputStream inputStream) throws MalformedURLException {
+    public String getUrlByToken(InputStream inputStream) throws MalformedURLException {
         
         String json = getJSON(inputStream);
         ObjectMapper mapper = new ObjectMapper();

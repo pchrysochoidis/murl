@@ -81,8 +81,10 @@ public class UrlServiceImpl implements UrlService{
         ShortenToken token = getTokenFromDTO(shortenDTO);
         
         token.setUrl(url);
-        shortenDTO = ShortenTokenDTO.map(tokenDAO.updateToken(token));
-        
+        String error = tokenDAO.validateToken(token);
+        if (error == null) {
+            shortenDTO = ShortenTokenDTO.map(tokenDAO.updateToken(token));
+        }
         tokenIds.add(shortenDTO.getId());
       
         return shortenDTO;

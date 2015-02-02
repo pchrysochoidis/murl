@@ -1,5 +1,7 @@
 package com.tinyurl.myurl.service.url.impl;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class ShortenTokenServiceImpl implements ShortenTokenService {
     ShortenTokenDAO tokenDAO;
     
     @Override
+    @Transactional
     public ShortenTokenDTO findTokenByName(String name) {
         return ShortenTokenDTO.map(tokenDAO.findTokenByName(name));
     }

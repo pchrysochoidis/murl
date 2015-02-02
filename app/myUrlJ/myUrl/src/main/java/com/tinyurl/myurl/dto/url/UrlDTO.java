@@ -1,5 +1,6 @@
 package com.tinyurl.myurl.dto.url;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,13 @@ import com.tinyurl.myurl.model.url.Url;
 /*data transfer object*/
 /*this is the object that will be transfered through web service to front end*/
 
-public class UrlDTO {
+public class UrlDTO implements Serializable{
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1882995142772619914L;
+
     
     private Long id;
     private String url;
