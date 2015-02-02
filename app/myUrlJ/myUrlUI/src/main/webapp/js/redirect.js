@@ -10,6 +10,11 @@ $(document).ready(function(){
             contentType: 'application/json',
             success: function(jsonRes){
             	console.log(jsonRes);
+            	if(!jsonRes.error){
+            		window.location.href = jsonRes.data.startsWith("http://") || jsonRes.data.startsWith("https://") ? jsonRes.data : "http://" + jsonRes.data;
+            	}else{
+            		
+            	}
             }
 		});
 	}else{
@@ -26,8 +31,8 @@ $(document).ready(function(){
 		case ERROR.INVALID_TOKEN:
 			message = "It seems that μUrl link is invalid."
 			break;
-
 		default:
+			message = "There was an error, please try again!";
 			break;
 		}
 		$("#messagescontainer").html(
@@ -36,6 +41,12 @@ $(document).ready(function(){
 						      '<strong>Redirect error. </strong> ' + message +
 						    '</div>'
 						);
+	}
+	
+	if (typeof String.prototype.startsWith != 'function') {
+	  String.prototype.startsWith = function (str){
+	    return this.indexOf(str) == 0;
+	  };
 	}
 });
 
