@@ -1,4 +1,4 @@
-package com.tinyurl.murl.dto;
+package com.tinyurl.myurl.dto;
 
 import java.io.Serializable;
 

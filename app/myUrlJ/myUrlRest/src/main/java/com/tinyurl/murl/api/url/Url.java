@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tinyurl.murl.api.BaseService;
-import com.tinyurl.murl.dto.ServiceResponseDTO;
+import com.tinyurl.myurl.dto.ServiceResponseDTO;
 import com.tinyurl.myurl.dto.url.ShortenTokenDTO;
 import com.tinyurl.myurl.dto.url.UrlDTO;
 import com.tinyurl.myurl.service.url.ShortenTokenService;

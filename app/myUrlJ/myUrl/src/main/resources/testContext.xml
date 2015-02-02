@@ -17,7 +17,7 @@
     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     
     <!-- The  beans exist in this package-->
-    <context:component-scan base-package="com.tinyurl.app.myUrl*" />
+    <context:component-scan base-package="com.tinyurl.myurl.*" />
 
     <!-- Use Spring annotation -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -26,7 +26,7 @@
     <!-- Thread safe session object shared by whole application  -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="defaultDataSource" />
-        <property name="packagesToScan" value="com.tinyurl.app.myUrl.model" />
+        <property name="packagesToScan" value="com.tinyurl.myurl.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"> 
                 <property name="showSql" value="true" />
